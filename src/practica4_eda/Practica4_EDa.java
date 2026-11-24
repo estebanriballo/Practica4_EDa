@@ -68,7 +68,15 @@ public class Practica4_EDa {
                     
                     break;
                 case "p":
-                    
+                    if(gEcologico == null){
+                        System.out.println("Primero debes crear el grafo de conectividad ecológica (comando c).");
+                    }else if(partes.length == 3){
+                        String origen = partes[1];
+                        String destino = partes[2];
+                        
+                    }else{
+                        System.out.println("Uso: p <origen> <destino>");
+                    }
                     
                     break;
                 case "s":
