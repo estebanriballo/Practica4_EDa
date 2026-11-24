@@ -69,6 +69,7 @@ public class Practica4_EDa {
                     break;
                 case "p":
                     
+                    
                     break;
                 case "s":
                     salir = true;
