@@ -35,7 +35,15 @@ public class Practica4_EDa {
             }   
         }
         
-
+        Iterator <Edge<Vuelo>> it = g.getEdges();
+        
+        double suma = 0;
+        
+        while(it.hasNext()){
+            suma += it.next().getData().getDistancia_km();
+        }
+        
+        System.out.println("Distancia media de todos los tramos de vuelo: " + suma/g.getM() + " km");
         
         System.out.println(g.toString());
     }
