@@ -62,10 +62,28 @@ public class Practica4_EDa {
             
             switch(comando){
                 case "c":
-                    
+                    if(partes.length == 2){
+                        try{
+                            int n = Integer.parseInt(partes[1]);
+                            gEcologico = crearGrafoEcologico(g, n);
+                        }catch(NumberFormatException ex){
+                            System.out.println("Error: 'n' debe ser un número entero.");
+                        }
+                    }else{
+                        System.out.println("Uso correcto: c <n>");
+                    }
                     break;
                 case "v":
-                    
+                    if(gEcologico == null){
+                        System.out.println("Primero debes crear el grafo de conectividad ecológica (comando c).");
+                    }else if(partes.length == 4){
+                        int idOrigen = Integer.parseInt(partes[1]);
+                        int idDestino = Integer.parseInt(partes[2]);
+                        String direccion = partes[3].toLowerCase();
+                        
+                    }else{
+                        System.out.println("Uso correcto: v <origen> <destino> <n|s>");
+                    }
                     break;
                 case "p":
                     if(gEcologico == null){
