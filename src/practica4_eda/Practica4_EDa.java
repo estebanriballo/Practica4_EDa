@@ -45,6 +45,40 @@ public class Practica4_EDa {
         
         System.out.println("Distancia media de todos los tramos de vuelo: " + suma/g.getM() + " km");
         
+        Scanner sc = new Scanner(System.in);
+        Graph<Escala, Vuelo> gEcologico = null;
+        boolean salir = false;
+        
+        while(!salir){
+            System.out.print("> ");
+            String linea = sc.nextLine().trim();
+            
+            if(linea.isEmpty()){
+                continue;
+            }
+            
+            String[] partes = linea.split("\\s+");
+            String comando = partes[0].toLowerCase();
+            
+            switch(comando){
+                case "c":
+                    
+                    break;
+                case "v":
+                    
+                    break;
+                case "p":
+                    
+                    break;
+                case "s":
+                    salir = true;
+                    break;
+                default:
+                    System.out.println("Comando no reconocido.");
+                    break;
+            }
+        }
+        
         System.out.println(g.toString());
     }
     
