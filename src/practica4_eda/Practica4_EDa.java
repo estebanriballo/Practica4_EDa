@@ -113,14 +113,14 @@ public class Practica4_EDa {
                                     condicion = true; // hay vuelo pero su exito es mayor que 0.95
                                 }
                                 if(condicion){
-                                    gEcologico.insertEdge(v2, v1,new Distancia(dist)); 
+                                    gEcologico.insertEdge(v2, v1); 
                                 }
                             }
                         }
                     }
 
                     System.out.println("Numero de escalas:" + gEcologico.getN());
-                    System.out.println("Numero de tramos:" + gEcologico.getM());
+                    System.out.println("Numeor de tramos:" + gEcologico.getM());
                     break;
                 case "v":
                     if(gEcologico == null){
