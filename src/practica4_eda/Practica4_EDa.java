@@ -62,16 +62,65 @@ public class Practica4_EDa {
             
             switch(comando){
                 case "c":
-                    if(partes.length == 2){
-                        try{
-                            int n = Integer.parseInt(partes[1]);
-                            gEcologico = crearGrafoEcologico(g, n);
-                        }catch(NumberFormatException ex){
-                            System.out.println("Error: 'n' debe ser un número entero.");
-                        }
-                    }else{
-                        System.out.println("Uso correcto: c <n>");
+                    if (partes.length < 2){
+                        System.out.println("Error, formato incorrecto. Su formato es c <distancia_n>");
+                        break;
                     }
+
+                    double n = Double.parseDouble(partes[1]);
+                    gEcologico = new  TreeMapGraph<>();
+
+                    Iterator<Vertex <Escala> > iteVertices = g.getVertices();
+                    while(iteVertices.hasNext()){
+                        gEcologico.insertVertex(iteVertices.next().getData());
+                    }
+
+                    Iterator<Vertex<Escala>> ite1 = gEcologico.getVertices();
+                    while(ite1.hasNext()){
+                        Vertex<Escala> v1 = ite1.next();
+
+                        Iterator<Vertex<Escala>> ite2 = gEcologico.getVertices();
+                        while(ite2.hasNext()){
+                            Vertex<Escala> v2 = ite2.next();
+
+                            if(v1.equals(v2)){
+                                continue;
+                            }
+
+                            //Calcular distancia con la formula del enunciado
+                            double dist = Distancia.calcularDis(v1.getData(), v2.getData());
+
+                            if(dist <= n){
+                                Vertex<Escala> origenGrafo = g.getVertex(String.valueOf(v1.getData().getId()));  
+                                Vertex<Escala> destinoGrafo = g.getVertex(String.valueOf(v2.getData().getId()));  
+
+                                Edge<Vuelo> vueloReal = null;
+                                if(origenGrafo != null && destinoGrafo != null){
+                                    int id1 = v1.getData().getId();
+                                    int id2 = v2.getData().getId();
+
+                                    vueloReal = g.getEdge(id1 + " - " + id2);
+
+                                    if(vueloReal == null){
+                                        vueloReal = g.getEdge(id2 + " - " + id1);
+                                    }
+                                }
+
+                                boolean condicion = false;
+                                if(vueloReal == null){
+                                    condicion = true; // no hay vuelo real
+                                }else if(vueloReal.getData().getProb_exito() >= 0.95){
+                                    condicion = true; // hay vuelo pero su exito es mayor que 0.95
+                                }
+                                if(condicion){
+                                    gEcologico.insertEdge(v2, v1,new Distancia(dist)); 
+                                }
+                            }
+                        }
+                    }
+
+                    System.out.println("Numero de escalas:" + gEcologico.getN());
+                    System.out.println("Numero de tramos:" + gEcologico.getM());
                     break;
                 case "v":
                     if(gEcologico == null){
@@ -105,8 +154,5 @@ public class Practica4_EDa {
                     break;
             }
         }
-        
-        System.out.println(g.toString());
     }
-    
 }
